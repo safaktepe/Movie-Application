@@ -6,15 +6,17 @@
 //
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ListVC: UIViewController {
     
     var movies: [Movie] = []
+    private var moviesListVM: MovieListViewModel!
     
     //MARK: - Views
     private lazy var moviesTableView: UITableView  = {
         let tableView = UITableView()
-        tableView.backgroundColor = .green
+        tableView.backgroundColor = .white
         tableView.register(MoviesCell.self, forCellReuseIdentifier: MoviesCell.identifier)
         return tableView
         }()
@@ -22,7 +24,7 @@ class ListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        movies = fetchDummyData()
+        fetchData()
         setupView()
         
         
@@ -47,27 +49,31 @@ class ListVC: UIViewController {
 //MARK: - Extensions - TableView functions
 extension ListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return self.moviesListVM == nil ? 0 : self.moviesListVM.numbersOfRowsInSection()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MoviesCell.identifier) as! MoviesCell
-        let movie = movies[indexPath.row]
-        cell.setCell(movie: movie)
+        let movieVM = self.moviesListVM.movieAtIndex(indexPath.row)
+        cell.movieNameLabel.text = movieVM.title
+        cell.realaseDateLabel.text = movieVM.release_date
+        cell.movieImageView.kf.setImage(with: URL(string: Constants.AllUrls.getImageUrl(path: movieVM.poster_path)))
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 130
     }
 }
 
 extension ListVC {
-    func fetchDummyData() -> [Movie] {
-      /*  let movie1 = Movie(image: UIImage(named: "image")!, title: "Bu birinci")
-        let movie2 = Movie(image: UIImage(named: "image2")!, title: "Bu ikinci")
-        let movie3 = Movie(image: UIImage(named: "image3")!, title: "Bu üçüncü")
-        let movie4 = Movie(image: UIImage(named: "image4")!, title: "Bu dördüncü")
-        return [movie1, movie2, movie3, movie4] */
-        let movie111 = Movie(overview: "hmm", title: "aa")
-        return [movie111]
+    func fetchData() {
+        let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=19c933a7a432aaf4883f50a0e918fc59")!
+        Webservices().getMovies(url: url) { movies in
+            if let movies = movies {
+                self.moviesListVM = MovieListViewModel(movies: movies)
+                DispatchQueue.main.async {
+                    self.moviesTableView.reloadData()
+                }
+            }
+        }
     }
 }

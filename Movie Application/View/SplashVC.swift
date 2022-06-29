@@ -26,17 +26,14 @@ class SplashVC: UIViewController {
             make.top.equalTo(view).offset(50)
             make.left.equalTo(view).offset(50)
             make.width.height.equalTo(100)
-                let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=19c933a7a432aaf4883f50a0e918fc59")!
-                Webservices().getMovies(url: url) { _ in
-                    
-                }
+           
         }
     }
     
     @objc func createButtonClicked() {
-     /*   let vc = MainTabBarVC()
+        let vc = MainTabBarVC()
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil) */
+        self.present(vc, animated: true, completion: nil) 
         
 
     }

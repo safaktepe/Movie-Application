@@ -13,13 +13,18 @@ class MoviesCell: UITableViewCell {
     
     var movieImageView = UIImageView()
     var movieNameLabel = UILabel()
+    var realaseDateLabel = UILabel()
+
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .white
         addSubview(movieImageView)
         addSubview(movieNameLabel)
+        addSubview(realaseDateLabel)
         configureImageView()
         configureNameLabel()
+        configureDateLabel()
         configureConstraints()
     }
     
@@ -35,12 +40,19 @@ class MoviesCell: UITableViewCell {
         movieNameLabel.numberOfLines = 0
         movieNameLabel.textColor = .black
         movieNameLabel.adjustsFontSizeToFitWidth = true
-        movieNameLabel.font = UIFont(name: movieNameLabel.font.fontName, size: 44)
+        movieNameLabel.font = UIFont(name: "Apple SD Gothic Neo Heavy", size: 12)
+    }
+    func configureDateLabel() {
+        realaseDateLabel.numberOfLines = 0
+        realaseDateLabel.textColor = .black
+        realaseDateLabel.adjustsFontSizeToFitWidth = true
+        realaseDateLabel.font = realaseDateLabel.font.withSize(15)
+        //realaseDateLabel.font = UIFont(name: "AppleSDGothicNeo-Heavy", size: 442)
     }
     
     func setCell(movie: Movie){
        // movieImageView.image = movie.image
-        movieNameLabel.text = movie.title
+       // movieNameLabel.text = movie.title
     }
     
     //MARK: - Constraints
@@ -49,14 +61,19 @@ class MoviesCell: UITableViewCell {
             make.top.equalTo(contentView).offset(8)
             make.left.equalTo(contentView).offset(8)
             make.bottom.equalTo(contentView).offset(8)
-            make.height.equalTo(80)
-            make.width.equalTo(movieImageView.snp.height).multipliedBy(1.5)
+            make.height.equalTo(100)
+            make.width.equalTo(movieImageView.snp.height).multipliedBy(1.2)
         }
         
         movieNameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
+            make.top.equalTo(contentView).offset(8)
             make.left.equalTo(movieImageView.snp.right).offset(8)
-            make.height.equalTo(24)
+           // make.height.equalTo(24)
+        }
+        
+        realaseDateLabel.snp.makeConstraints { make in
+            make.top.equalTo(movieNameLabel.snp.bottom).offset(8)
+            make.left.equalTo(movieImageView.snp.right).offset(8)
         }
     }
 }

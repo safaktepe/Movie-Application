@@ -14,6 +14,10 @@ struct MovieList: Decodable {
 }
 
 struct Movie: Decodable {
+    let id: Int
     var overview: String
     var title: String
+    let poster_path: String
+    let release_date: String
+    let vote_average: Float
 }
