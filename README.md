@@ -1,4 +1,4 @@
-# News Application - MVVM - UIKit - No Storyboard - TMDB API - KingFisher
+# Movie Application - MVVM - UIKit - No Storyboard - TMDB API - KingFisher
 
  A simple app where we can display top rated movies  by using TheMoviesDB API, display details on separate view and add bookmarks which stored locally. 
  
