@@ -10,7 +10,8 @@ class MainTabBarVC: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        tabBar.barTintColor = CustomColor.hexStringToUIColor(hex: "#2C394B")
+        tabBar.isTranslucent = false
         setupView()
         
     }
@@ -21,13 +22,17 @@ class MainTabBarVC: UITabBarController {
         let listVC = ListVC()
         listVC.navigationItem.title = "Movies"
         let listNavVC = UINavigationController(rootViewController: listVC)
-        listNavVC.tabBarItem.title = "First"
+        listNavVC.tabBarItem.title = ""
+        listNavVC.tabBarItem.image = UIImage(systemName: "house")
+        listNavVC.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         listNavVC.navigationBar.prefersLargeTitles = true
         
         let favoritesVC = FavMoviesVC()
         favoritesVC.navigationItem.title = "Favorites"
         let favroitesNavVC = UINavigationController(rootViewController: favoritesVC)
-        favroitesNavVC.tabBarItem.title = "Second"
+        favroitesNavVC.tabBarItem.title = ""
+        favroitesNavVC.tabBarItem.image = UIImage(systemName: "heart")
+        favroitesNavVC.tabBarItem.selectedImage = UIImage(systemName: "heart.fill")
         favroitesNavVC.navigationBar.prefersLargeTitles = true
         
         let appearance = UITabBarItem.appearance()

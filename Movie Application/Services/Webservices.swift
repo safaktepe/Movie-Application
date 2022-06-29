@@ -19,7 +19,6 @@ class Webservices {
                 if let movieList = movieList {
                     completion(movieList.results)
                 }
-                print(movieList?.results)
             }
         }.resume()
     }

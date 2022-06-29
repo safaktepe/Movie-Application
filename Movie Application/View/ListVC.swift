@@ -16,14 +16,13 @@ class ListVC: UIViewController {
     //MARK: - Views
     private lazy var moviesTableView: UITableView  = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = CustomColor.hexStringToUIColor(hex: "#082032")
         tableView.register(MoviesCell.self, forCellReuseIdentifier: MoviesCell.identifier)
         return tableView
         }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         fetchData()
         setupView()
         
@@ -32,6 +31,7 @@ class ListVC: UIViewController {
     
     //MARK: - SetupView
     func setupView(){
+        view.backgroundColor = CustomColor.hexStringToUIColor(hex: "#082032")
         view.addSubview(moviesTableView)
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
@@ -62,6 +62,16 @@ extension ListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let movieVM = self.moviesListVM.movieAtIndex(indexPath.row)
+            let vc = DetailsPageVC()
+            vc.detailNameLabel.text = movieVM.title
+            vc.rateLabel.text = String(movieVM.vote_average)
+            vc.dateLabel.text = movieVM.release_date
+            vc.detailImageView.kf.setImage(with: URL(string: Constants.AllUrls.getImageUrl(path: movieVM.poster_path)))
+            self.navigationController?.pushViewController(vc, animated: true)
+            vc.detailDescriptionLabel.text = movieVM.overview
+        }
 }
 
 extension ListVC {

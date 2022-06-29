@@ -18,7 +18,7 @@ class MoviesCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = CustomColor.hexStringToUIColor(hex: "#082032")
         addSubview(movieImageView)
         addSubview(movieNameLabel)
         addSubview(realaseDateLabel)
@@ -38,13 +38,13 @@ class MoviesCell: UITableViewCell {
     }
     func configureNameLabel() {
         movieNameLabel.numberOfLines = 0
-        movieNameLabel.textColor = .black
+        movieNameLabel.textColor = .white
         movieNameLabel.adjustsFontSizeToFitWidth = true
-        movieNameLabel.font = UIFont(name: "Apple SD Gothic Neo Heavy", size: 12)
+        movieNameLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
     }
     func configureDateLabel() {
         realaseDateLabel.numberOfLines = 0
-        realaseDateLabel.textColor = .black
+        realaseDateLabel.textColor = .lightGray
         realaseDateLabel.adjustsFontSizeToFitWidth = true
         realaseDateLabel.font = realaseDateLabel.font.withSize(15)
         //realaseDateLabel.font = UIFont(name: "AppleSDGothicNeo-Heavy", size: 442)
@@ -68,7 +68,6 @@ class MoviesCell: UITableViewCell {
         movieNameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(8)
             make.left.equalTo(movieImageView.snp.right).offset(8)
-           // make.height.equalTo(24)
         }
         
         realaseDateLabel.snp.makeConstraints { make in

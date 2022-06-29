@@ -19,6 +19,7 @@ extension MovieListViewModel {
         let movie = self.movies[index]
         return MovieViewModel(movie)
     }
+   
 }
 
 struct MovieViewModel {

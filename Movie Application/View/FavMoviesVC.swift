@@ -12,7 +12,7 @@ class FavMoviesVC: UIViewController {
     //MARK: - Views
     private lazy var favoritesTableView: UITableView  = {
         let tableView = UITableView()
-        tableView.backgroundColor = .green
+        tableView.backgroundColor = CustomColor.hexStringToUIColor(hex: "#082032")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         return tableView
         }()
@@ -20,7 +20,7 @@ class FavMoviesVC: UIViewController {
     //MARK: - ViewDidLoad - SetupView
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = CustomColor.hexStringToUIColor(hex: "#082032")
         setupView()
     }
     
