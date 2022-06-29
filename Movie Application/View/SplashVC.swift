@@ -20,7 +20,7 @@ class SplashVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            view.backgroundColor = .white
+            view.backgroundColor = .red
             view.addSubview(createTaskButton)
             createTaskButton.snp.makeConstraints { make in
             make.top.equalTo(view).offset(50)
